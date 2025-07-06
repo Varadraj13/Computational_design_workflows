@@ -1,6 +1,6 @@
 /* Apply general styles to the body */
 body {
-    background: linear-gradient(to right, #ffffff, #8A2BE2, #FFFF00); /* White to violet to yellow gradient */
+    background: linear-gradient(to bottom, #ffffff, #8A2BE2, #FFFF00); /* White to violet to yellow gradient, vertical */
     color: #000000;            /* Black text */
     font-family: Arial, sans-serif;
     text-align: center;
