@@ -133,28 +133,6 @@ new p5(sphereSketch);
 // Initialize GSAP ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
-// Loading Screen
-window.addEventListener('load', () => {
-    const loadingScreen = document.querySelector('.loading-screen');
-    const mainContent = document.querySelector('.main-content');
-
-    gsap.to(loadingScreen, {
-        opacity: 0,
-        duration: 1,
-        onComplete: () => {
-            loadingScreen.style.display = 'none';
-
-            // ✨ Show your actual website
-            mainContent.style.display = 'block';
-            gsap.fromTo(mainContent, { opacity: 0 }, { opacity: 1, duration: 1 });
-
-            // Now start your animations
-            initAnimations();
-        }
-    });
-});
-
-
 // Theme Toggle
 const themeBtn = document.getElementById('themeBtn');
 const body = document.body;
@@ -164,12 +142,6 @@ themeBtn.addEventListener('click', () => {
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     
     body.setAttribute('data-theme', newTheme);
-    
-    // Animate theme transition
-    gsap.to(body, {
-        duration: 0.5,
-        ease: 'power2.inOut'
-    });
     
     // Update button icon
     const lightIcon = themeBtn.querySelector('.light-icon');
@@ -184,180 +156,67 @@ themeBtn.addEventListener('click', () => {
     }
 });
 
-// Typewriter Effect
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
+// Initialize animations when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    // Set initial theme
+    body.setAttribute('data-theme', 'dark');
     
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
+    // Show dark icon initially
+    const lightIcon = themeBtn.querySelector('.light-icon');
+    const darkIcon = themeBtn.querySelector('.dark-icon');
+    gsap.set(lightIcon, { opacity: 0 });
+    gsap.set(darkIcon, { opacity: 1 });
     
-    type();
-}
-
-// Initialize all animations
-function initAnimations() {
-    // Typewriter effect for hero section
-    const typewriterElement = document.getElementById('typewriter');
-    const typewriterText = "Hong Kong's master of mood, memory, and melancholy. A director who paints with light, time, and the spaces between people.";
-    
-    // Start typewriter after a delay
-    setTimeout(() => {
-        typeWriter(typewriterElement, typewriterText, 50);
-    }, 1000);
-
-    // Hero section animations
-    gsap.from('.hero-title .title-line', {
-        y: 100,
-        opacity: 0,
-        duration: 1.5,
-        stagger: 0.3,
-        ease: 'power3.out'
-    });
-
-    gsap.from('.floating-elements .float-element', {
-        y: 50,
-        opacity: 0,
+    // TEST ANIMATION 1: Gentle title glow effect
+    const titleLines = document.querySelectorAll('.title-line');
+    gsap.to(titleLines, {
+        textShadow: '0 0 40px rgba(255, 0, 128, 0.8)',
         duration: 2,
-        stagger: 0.2,
-        ease: 'power2.out'
+        stagger: 0.5,
+        repeat: -1,
+        yoyo: true,
+        ease: 'power2.inOut'
     });
-
-    // Floating elements parallax effect
+    
+    // TEST ANIMATION 2: Floating elements - FIXED VERSION
     const floatElements = document.querySelectorAll('.float-element');
-    floatElements.forEach(element => {
-        const speed = element.getAttribute('data-speed');
+    console.log('Found floating elements:', floatElements.length); // Debug log
+    
+    floatElements.forEach((element, index) => {
+        // Make sure elements are visible
+        gsap.set(element, { opacity: 0.7 });
         
+        // Create a simple floating animation
         gsap.to(element, {
-            y: -100,
-            duration: 10,
+            y: -20,
+            duration: 2 + index,
             repeat: -1,
             yoyo: true,
-            ease: 'power1.inOut',
-            delay: Math.random() * 2
+            ease: 'sine.inOut',
+            delay: index * 0.3
+        });
+        
+        // Add a subtle rotation
+        gsap.to(element, {
+            rotation: 5,
+            duration: 3 + index,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut',
+            delay: index * 0.5
         });
     });
-
-    // Scroll-triggered animations
-    gsap.from('.favorite-section .section-title', {
-        scrollTrigger: {
-            trigger: '.favorite-section',
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse'
-        },
-        x: -100,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out'
-    });
-
-    gsap.from('.handwritten-text p', {
-        scrollTrigger: {
-            trigger: '.favorite-section',
-            start: 'top 70%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse'
-        },
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.3,
-        ease: 'power3.out'
-    });
-
-    gsap.from('.image-content', {
-        scrollTrigger: {
-            trigger: '.favorite-section',
-            start: 'top 70%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse'
-        },
-        x: 100,
-        opacity: 0,
-        duration: 1.5,
-        ease: 'power3.out'
-    });
-
-    // Film cards animations
-    gsap.from('.film-card', {
-        scrollTrigger: {
-            trigger: '.films-section',
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse'
-        },
-        y: 100,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: 'power3.out'
-    });
-
-    // Vibe meters animations
-    gsap.from('.vibe-card', {
-        scrollTrigger: {
-            trigger: '.vibe-section',
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse'
-        },
-        scale: 0.8,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.3,
-        ease: 'back.out(1.7)'
-    });
-
-    // Animate vibe meters
+    
+    // Initialize vibe meters
     const meterFills = document.querySelectorAll('.meter-fill');
     meterFills.forEach(meter => {
         const value = meter.getAttribute('data-value');
-        
         gsap.to(meter, {
             width: `${value}%`,
             duration: 2,
-            delay: 1,
-            ease: 'power2.out',
-            scrollTrigger: {
-                trigger: meter,
-                start: 'top 90%',
-                toggleActions: 'play none none reverse'
-            }
+            delay: 0.5,
+            ease: 'power2.out'
         });
-    });
-
-    // Outro section animations
-    gsap.from('.wkw-quote', {
-        scrollTrigger: {
-            trigger: '.outro-section',
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse'
-        },
-        y: 50,
-        opacity: 0,
-        duration: 1.5,
-        ease: 'power3.out'
-    });
-
-    gsap.from('.transmission-text', {
-        scrollTrigger: {
-            trigger: '.outro-section',
-            start: 'top 70%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse'
-        },
-        y: 30,
-        opacity: 0,
-        duration: 1,
-        delay: 0.5,
-        ease: 'power3.out'
     });
 
     // Navigation active state
@@ -368,7 +227,6 @@ function initAnimations() {
         let current = '';
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
             if (scrollY >= (sectionTop - 200)) {
                 current = section.getAttribute('id');
             }
@@ -389,11 +247,12 @@ function initAnimations() {
             const targetId = link.getAttribute('href');
             const targetSection = document.querySelector(targetId);
             
-            gsap.to(window, {
-                duration: 1.5,
-                scrollTo: targetSection,
-                ease: 'power3.inOut'
-            });
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         });
     });
 
@@ -437,120 +296,9 @@ function initAnimations() {
         });
     });
 
-    // VHS flicker effect
-    const vhsOverlay = document.querySelector('.vhs-overlay');
-    setInterval(() => {
-        gsap.to(vhsOverlay, {
-            opacity: Math.random() * 0.3 + 0.1,
-            duration: 0.1,
-            ease: 'none'
-        });
-    }, 100);
-
-    // CRT scanlines effect
-    const scanlines = document.querySelector('.scanlines');
-    gsap.to(scanlines, {
-        y: '100%',
-        duration: 0.1,
-        repeat: -1,
-        ease: 'none'
-    });
-
-    // Glitch effect for image content
-    const glitchOverlay = document.querySelector('.glitch-overlay');
-    setInterval(() => {
-        gsap.to(glitchOverlay, {
-            opacity: Math.random() * 0.3,
-            duration: 0.1,
-            ease: 'none'
-        });
-    }, 3000);
-
-    // Parallax effect for slow zoom background
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const slowZoomBg = document.querySelector('.slow-zoom-bg');
-        const speed = scrolled * 0.5;
-        
-        gsap.set(slowZoomBg, {
-            y: speed,
-            scale: 1 + (scrolled * 0.0001)
-        });
-    });
-
-    // Add some random glitch effects
-    setInterval(() => {
-        const randomElement = document.querySelector('.hero-title');
-        if (randomElement) {
-            gsap.to(randomElement, {
-                x: Math.random() * 10 - 5,
-                duration: 0.1,
-                ease: 'none',
-                onComplete: () => {
-                    gsap.to(randomElement, {
-                        x: 0,
-                        duration: 0.1,
-                        ease: 'none'
-                    });
-                }
-            });
-        }
-    }, 5000);
-
-    // Initialize floating elements with different speeds
-    const floatingElements = document.querySelectorAll('.float-element');
-    floatingElements.forEach((element, index) => {
-        const speed = 3 + index * 2;
-        const delay = index * 0.5;
-        
-        gsap.to(element, {
-            y: -50,
-            rotation: 360,
-            duration: speed,
-            repeat: -1,
-            yoyo: true,
-            ease: 'power1.inOut',
-            delay: delay
-        });
-    });
-}
-
-// Add GSAP ScrollTo plugin for smooth scrolling
-gsap.registerPlugin(ScrollToPlugin);
-
-// Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    // Set initial theme
-    body.setAttribute('data-theme', 'dark');
-    
-    // Show light icon initially
-    const lightIcon = themeBtn.querySelector('.light-icon');
-    const darkIcon = themeBtn.querySelector('.dark-icon');
-    gsap.set(lightIcon, { opacity: 0 });
-    gsap.set(darkIcon, { opacity: 1 });
-    
-    // Add some ambient sound effects (optional)
-    // You can add audio files and play them on certain interactions
-    
     // Add keyboard navigation
     document.addEventListener('keydown', (e) => {
         switch(e.key) {
-            case 'ArrowUp':
-                e.preventDefault();
-                gsap.to(window, {
-                    duration: 1,
-                    scrollTo: '-=100vh',
-                    ease: 'power3.inOut'
-                });
-                break;
-            case 'ArrowDown':
-                e.preventDefault();
-                gsap.to(window, {
-                    duration: 1,
-                    scrollTo: '+=100vh',
-                    ease: 'power3.inOut'
-                });
-                break;
             case ' ':
                 e.preventDefault();
                 // Toggle theme with spacebar
@@ -564,3 +312,294 @@ document.addEventListener('DOMContentLoaded', () => {
 console.log('%c🎬 Welcome to the Wong Kar-wai Vibe-Coded Cinema! 🎬', 'color: #ff0080; font-size: 20px; font-weight: bold;');
 console.log('%c🌆 Urban loneliness, romantic melancholy, neon ambiance... 🌆', 'color: #00ffff; font-size: 14px;');
 console.log('%c💔 "In the mood for love, in the mood for life." 💔', 'color: #8b00ff; font-size: 12px; font-style: italic;');
+
+// GSAP Animations
+gsap.registerPlugin(ScrollTrigger);
+
+// Theme Toggle
+const themeBtn = document.getElementById('themeBtn');
+const body = document.body;
+
+themeBtn.addEventListener('click', () => {
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    body.setAttribute('data-theme', newTheme);
+    
+    // Update theme in localStorage
+    localStorage.setItem('theme', newTheme);
+});
+
+// Load saved theme
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+    body.setAttribute('data-theme', savedTheme);
+}
+
+// Title Glow Effect
+gsap.to('.hero-title', {
+    textShadow: '0 0 30px rgba(255, 0, 128, 0.8), 0 0 60px rgba(255, 0, 128, 0.4)',
+    duration: 2,
+    repeat: -1,
+    yoyo: true,
+    ease: 'power2.inOut'
+});
+
+// Floating Elements Animation
+const floatingElements = document.querySelectorAll('.float-element');
+console.log('Found floating elements:', floatingElements.length);
+
+floatingElements.forEach((element, index) => {
+    const speed = parseFloat(element.dataset.speed) || 0.5;
+    const delay = index * 0.5;
+    
+    gsap.set(element, { opacity: 0.7 });
+    
+    gsap.to(element, {
+        y: -30,
+        x: Math.random() * 20 - 10,
+        duration: 3 + speed * 2,
+        repeat: -1,
+        yoyo: true,
+        ease: 'power2.inOut',
+        delay: delay
+    });
+});
+
+// Smooth Scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Active Navigation
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= (sectionTop - 200)) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
+    });
+});
+
+// Film Card Interactions
+const filmCards = document.querySelectorAll('.film-card');
+filmCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        gsap.to(card, {
+            scale: 1.05,
+            duration: 0.3,
+            ease: 'power2.out'
+        });
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+            scale: 1,
+            duration: 0.3,
+            ease: 'power2.out'
+        });
+    });
+});
+
+// Vibe Meters Animation
+const vibeMeters = document.querySelectorAll('.meter-fill');
+vibeMeters.forEach(meter => {
+    const value = meter.dataset.value;
+    gsap.to(meter, {
+        width: `${value}%`,
+        duration: 2,
+        delay: 1,
+        ease: 'power2.out'
+    });
+});
+
+// p5.js Sketch for Atmospheric Effects
+let particles = [];
+let neonLines = [];
+let mouseX = 0;
+let mouseY = 0;
+
+function setup() {
+    const canvas = createCanvas(windowWidth, windowHeight);
+    canvas.parent('p5-canvas-container');
+    
+    // Create atmospheric particles
+    for (let i = 0; i < 50; i++) {
+        particles.push(new Particle());
+    }
+    
+    // Create neon line effects
+    for (let i = 0; i < 5; i++) {
+        neonLines.push(new NeonLine());
+    }
+}
+
+function draw() {
+    // Semi-transparent background for trail effect
+    fill(10, 10, 10, 20);
+    noStroke();
+    rect(0, 0, width, height);
+    
+    // Update mouse position
+    mouseX = mouseX * 0.9 + mouseX * 0.1;
+    mouseY = mouseY * 0.9 + mouseY * 0.1;
+    
+    // Draw and update particles
+    particles.forEach(particle => {
+        particle.update();
+        particle.display();
+    });
+    
+    // Draw and update neon lines
+    neonLines.forEach(line => {
+        line.update();
+        line.display();
+    });
+    
+    // Add subtle scanlines effect
+    drawScanlines();
+}
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+}
+
+class Particle {
+    constructor() {
+        this.x = random(width);
+        this.y = random(height);
+        this.vx = random(-0.5, 0.5);
+        this.vy = random(-0.5, 0.5);
+        this.size = random(1, 3);
+        this.alpha = random(50, 150);
+        this.color = color(random([255, 0, 128], [139, 0, 255], [0, 255, 255]));
+    }
+    
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        
+        // Wrap around edges
+        if (this.x < 0) this.x = width;
+        if (this.x > width) this.x = 0;
+        if (this.y < 0) this.y = height;
+        if (this.y > height) this.y = 0;
+        
+        // Subtle interaction with mouse
+        let d = dist(this.x, this.y, mouseX, mouseY);
+        if (d < 100) {
+            let angle = atan2(mouseY - this.y, mouseX - this.x);
+            this.vx += cos(angle) * 0.1;
+            this.vy += sin(angle) * 0.1;
+        }
+        
+        // Limit velocity
+        this.vx = constrain(this.vx, -1, 1);
+        this.vy = constrain(this.vy, -1, 1);
+    }
+    
+    display() {
+        noStroke();
+        fill(red(this.color), green(this.color), blue(this.color), this.alpha);
+        ellipse(this.x, this.y, this.size);
+        
+        // Add glow effect
+        fill(red(this.color), green(this.color), blue(this.color), this.alpha * 0.3);
+        ellipse(this.x, this.y, this.size * 3);
+    }
+}
+
+class NeonLine {
+    constructor() {
+        this.x1 = random(width);
+        this.y1 = random(height);
+        this.x2 = this.x1 + random(-100, 100);
+        this.y2 = this.y1 + random(-100, 100);
+        this.alpha = random(30, 80);
+        this.thickness = random(1, 3);
+        this.color = color(random([255, 0, 128], [139, 0, 255]));
+        this.pulse = 0;
+    }
+    
+    update() {
+        this.pulse += 0.05;
+        this.alpha = 30 + sin(this.pulse) * 20;
+        
+        // Occasionally move the line
+        if (random() < 0.01) {
+            this.x1 = random(width);
+            this.y1 = random(height);
+            this.x2 = this.x1 + random(-100, 100);
+            this.y2 = this.y1 + random(-100, 100);
+        }
+    }
+    
+    display() {
+        stroke(red(this.color), green(this.color), blue(this.color), this.alpha);
+        strokeWeight(this.thickness);
+        line(this.x1, this.y1, this.x2, this.y2);
+        
+        // Add glow effect
+        stroke(red(this.color), green(this.color), blue(this.color), this.alpha * 0.3);
+        strokeWeight(this.thickness * 2);
+        line(this.x1, this.y1, this.x2, this.y2);
+    }
+}
+
+function drawScanlines() {
+    stroke(255, 255, 255, 10);
+    strokeWeight(1);
+    for (let y = 0; y < height; y += 4) {
+        line(0, y, width, y);
+    }
+}
+
+// Mouse interaction
+function mouseMoved() {
+    mouseX = mouseX;
+    mouseY = mouseY;
+}
+
+// Add some interactive elements when scrolling
+window.addEventListener('scroll', () => {
+    const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    
+    // Adjust particle behavior based on scroll
+    particles.forEach(particle => {
+        particle.vx += random(-0.1, 0.1) * scrollPercent;
+        particle.vy += random(-0.1, 0.1) * scrollPercent;
+    });
+});
+
+// Add CRT flicker effect to outro section
+const outroSection = document.querySelector('.outro-section');
+if (outroSection) {
+    setInterval(() => {
+        if (Math.random() < 0.1) { // 10% chance every interval
+            outroSection.style.filter = 'brightness(0.8) contrast(1.2)';
+            setTimeout(() => {
+                outroSection.style.filter = 'none';
+            }, 100);
+        }
+    }, 2000);
+}
