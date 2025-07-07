@@ -2,232 +2,263 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Wong Kar-wai Filmography - Complete Movie Directory</title>
-
-    <!-- Link to external CSS file -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wong Kar-wai | Vibe-Coded Cinema</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet">
+    
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- p5.js library for 3D graphics -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
-
-    <!-- Link to external JavaScript file -->
-    <script defer src="script.js"></script>
 </head>
 <body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <button id="themeBtn" class="theme-btn">
+            <span class="light-icon">☀️</span>
+            <span class="dark-icon">🌙</span>
+        </button>
+    </div>
 
-    <!-- Header section -->
-    <header>
-        <h1>Wong Kar-wai</h1>
-        <h2>Master of Mood, Memory, and Melancholy</h2>
-        <p class="director-intro">Hong Kong's most celebrated auteur director, known for his distinctive visual style, atmospheric storytelling, and exploration of love, time, and urban alienation.</p>
-    </header>
-
-    <!-- Director Biography Section -->
-    <section class="director-bio">
-        <h3>About the Director</h3>
-        <div class="bio-content">
-            <p><strong>Born:</strong> July 17, 1958, Shanghai, China</p>
-            <p><strong>Nationality:</strong> Hong Kong</p>
-            <p><strong>Style:</strong> Known for his moody, atmospheric films with distinctive cinematography, non-linear narratives, and themes of love, memory, and urban alienation.</p>
-            <p><strong>Signature Elements:</strong> Slow motion sequences, neon-lit cityscapes, rain-soaked streets, voice-over narration, and collaborations with cinematographer Christopher Doyle.</p>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-text">
+            <span class="loading-char">L</span>
+            <span class="loading-char">O</span>
+            <span class="loading-char">A</span>
+            <span class="loading-char">D</span>
+            <span class="loading-char">I</span>
+            <span class="loading-char">N</span>
+            <span class="loading-char">G</span>
         </div>
-    </section>
+        <div class="scanlines"></div>
+    </div>
 
-    <!-- Filmography Section -->
-    <section class="filmography">
-        <h3>Complete Filmography</h3>
-        
-        <div class="film-grid">
-            <!-- As Tears Go By (1988) -->
-            <div class="film-card">
-                <div class="poster-container">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8a/As_Tears_Go_By_poster.jpg/220px-As_Tears_Go_By_poster.jpg" alt="As Tears Go By Poster" class="film-poster">
-                </div>
-                <div class="film-info">
-                    <h4>As Tears Go By (旺角卡門)</h4>
-                    <p class="year">1988</p>
-                    <p class="genre">Crime Drama</p>
-                    <p class="synopsis">A small-time gangster must choose between his criminal life and the woman he loves. Wong's debut feature introduces his signature visual style and themes of urban alienation.</p>
-                    <p class="cast"><strong>Cast:</strong> Andy Lau, Maggie Cheung, Jacky Cheung</p>
-                    <p class="runtime"><strong>Runtime:</strong> 102 minutes</p>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Section 1: Who's Wong Kar-wai? -->
+        <section class="hero-section" id="hero">
+            <div class="vhs-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line">WHO'S</span>
+                    <span class="title-line">WONG</span>
+                    <span class="title-line">KAR-WAI?</span>
+                </h1>
+                <div class="typewriter-container">
+                    <p class="typewriter-text" id="typewriter"></p>
                 </div>
             </div>
+            <div class="floating-elements">
+                <div class="float-element" data-speed="0.5">🌆</div>
+                <div class="float-element" data-speed="0.3">💔</div>
+                <div class="float-element" data-speed="0.7">🌀</div>
+                <div class="float-element" data-speed="0.4">❤️</div>
+            </div>
+        </section>
 
-            <!-- Days of Being Wild (1990) -->
-            <div class="film-card">
-                <div class="poster-container">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/Days_of_Being_Wild_poster.jpg/220px-Days_of_Being_Wild_poster.jpg" alt="Days of Being Wild Poster" class="film-poster">
+        <!-- Section 2: Why He's My Favorite Director -->
+        <section class="favorite-section" id="favorite">
+            <div class="split-layout">
+                <div class="text-content">
+                    <h2 class="section-title">Why He's My Favorite Director</h2>
+                    <div class="handwritten-text">
+                        <p>Wong Kar-wai doesn't just make films—he captures the essence of urban loneliness, the poetry of missed connections, and the beauty of fleeting moments. His work is a meditation on time, memory, and the spaces between people.</p>
+                        <p>Every frame is a painting, every scene a poem. The neon-lit streets of Hong Kong become characters themselves, whispering secrets of love and loss. His films are like dreams you don't want to wake up from.</p>
+                        <p>There's something deeply human about his storytelling—the way he shows us that love isn't always about happy endings, but about the moments that change us forever.</p>
+                    </div>
                 </div>
-                <div class="film-info">
-                    <h4>Days of Being Wild (阿飛正傳)</h4>
-                    <p class="year">1990</p>
-                    <p class="genre">Drama</p>
-                    <p class="synopsis">A playboy drifter's relationships with two women in 1960s Hong Kong. The first film in Wong's informal trilogy about time and memory.</p>
-                    <p class="cast"><strong>Cast:</strong> Leslie Cheung, Maggie Cheung, Andy Lau, Carina Lau</p>
-                    <p class="runtime"><strong>Runtime:</strong> 94 minutes</p>
+                <div class="image-content">
+                    <div class="slow-zoom-bg"></div>
+                    <div class="glitch-overlay"></div>
                 </div>
             </div>
+        </section>
 
-            <!-- Chungking Express (1994) -->
-            <div class="film-card">
-                <div class="poster-container">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Chungking_Express_poster.jpg/220px-Chungking_Express_poster.jpg" alt="Chungking Express Poster" class="film-poster">
+        <!-- Section 3: Film Posters + Trailers + Collage -->
+        <section class="films-section" id="films">
+            <h2 class="section-title">Filmography Collage</h2>
+            <div class="masonry-grid">
+                <div class="film-card" data-film="chungking">
+                    <div class="card-poster">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Chungking_Express_poster.jpg/220px-Chungking_Express_poster.jpg" alt="Chungking Express">
+                        <div class="play-overlay">▶️</div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Chungking Express</h3>
+                        <p>1994 • Romance Drama</p>
+                    </div>
                 </div>
-                <div class="film-info">
-                    <h4>Chungking Express (重慶森林)</h4>
-                    <p class="year">1994</p>
-                    <p class="genre">Romance Drama</p>
-                    <p class="synopsis">Two separate stories of love and loneliness in Hong Kong, featuring a cop obsessed with expiration dates and a mysterious woman in a blonde wig.</p>
-                    <p class="cast"><strong>Cast:</strong> Brigitte Lin, Takeshi Kaneshiro, Tony Leung, Faye Wong</p>
-                    <p class="runtime"><strong>Runtime:</strong> 102 minutes</p>
+
+                <div class="film-card" data-film="mood">
+                    <div class="card-poster">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/4e/In_the_Mood_for_Love_poster.jpg/220px-In_the_Mood_for_Love_poster.jpg" alt="In the Mood for Love">
+                        <div class="play-overlay">▶️</div>
+                    </div>
+                    <div class="card-info">
+                        <h3>In the Mood for Love</h3>
+                        <p>2000 • Romance Drama</p>
+                    </div>
+                </div>
+
+                <div class="film-card" data-film="fallen">
+                    <div class="card-poster">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/Fallen_Angels_poster.jpg/220px-Fallen_Angels_poster.jpg" alt="Fallen Angels">
+                        <div class="play-overlay">▶️</div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Fallen Angels</h3>
+                        <p>1995 • Crime Drama</p>
+                    </div>
+                </div>
+
+                <div class="film-card" data-film="happy">
+                    <div class="card-poster">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8a/Happy_Together_poster.jpg/220px-Happy_Together_poster.jpg" alt="Happy Together">
+                        <div class="play-overlay">▶️</div>
+                    </div>
+                    <div class="card-info">
+                        <h3>Happy Together</h3>
+                        <p>1997 • Romance Drama</p>
+                    </div>
+                </div>
+
+                <div class="film-card" data-film="2046">
+                    <div class="card-poster">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8a/2046_poster.jpg/220px-2046_poster.jpg" alt="2046">
+                        <div class="play-overlay">▶️</div>
+                    </div>
+                    <div class="card-info">
+                        <h3>2046</h3>
+                        <p>2004 • Sci-Fi Romance</p>
+                    </div>
+                </div>
+
+                <div class="film-card" data-film="grandmaster">
+                    <div class="card-poster">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8a/The_Grandmaster_poster.jpg/220px-The_Grandmaster_poster.jpg" alt="The Grandmaster">
+                        <div class="play-overlay">▶️</div>
+                    </div>
+                    <div class="card-info">
+                        <h3>The Grandmaster</h3>
+                        <p>2013 • Martial Arts Drama</p>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Ashes of Time (1994) -->
-            <div class="film-card">
-                <div class="poster-container">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8a/Ashes_of_Time_poster.jpg/220px-Ashes_of_Time_poster.jpg" alt="Ashes of Time Poster" class="film-poster">
+        <!-- Section 4: Rating Films by Vibe -->
+        <section class="vibe-section" id="vibe">
+            <h2 class="section-title">Rating Films by Vibe</h2>
+            <div class="vibe-grid">
+                <div class="vibe-card">
+                    <h3>Chungking Express</h3>
+                    <div class="vibe-meters">
+                        <div class="vibe-meter">
+                            <span class="vibe-label">🌆 Urban Loneliness</span>
+                            <div class="meter-container">
+                                <div class="meter-fill" data-value="85"></div>
+                            </div>
+                        </div>
+                        <div class="vibe-meter">
+                            <span class="vibe-label">❤️ Romantic Melancholy</span>
+                            <div class="meter-container">
+                                <div class="meter-fill" data-value="90"></div>
+                            </div>
+                        </div>
+                        <div class="vibe-meter">
+                            <span class="vibe-label">🌀 Dreamlike Quality</span>
+                            <div class="meter-container">
+                                <div class="meter-fill" data-value="95"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="film-info">
-                    <h4>Ashes of Time (東邪西毒)</h4>
-                    <p class="year">1994</p>
-                    <p class="genre">Wuxia Drama</p>
-                    <p class="synopsis">A reimagining of Jin Yong's wuxia novel, focusing on the emotional lives of swordsmen rather than action sequences. Features stunning desert cinematography.</p>
-                    <p class="cast"><strong>Cast:</strong> Leslie Cheung, Tony Leung, Brigitte Lin, Maggie Cheung</p>
-                    <p class="runtime"><strong>Runtime:</strong> 100 minutes</p>
+
+                <div class="vibe-card">
+                    <h3>In the Mood for Love</h3>
+                    <div class="vibe-meters">
+                        <div class="vibe-meter">
+                            <span class="vibe-label">🌆 Urban Loneliness</span>
+                            <div class="meter-container">
+                                <div class="meter-fill" data-value="95"></div>
+                            </div>
+                        </div>
+                        <div class="vibe-meter">
+                            <span class="vibe-label">❤️ Romantic Melancholy</span>
+                            <div class="meter-container">
+                                <div class="meter-fill" data-value="100"></div>
+                            </div>
+                        </div>
+                        <div class="vibe-meter">
+                            <span class="vibe-label">🌀 Dreamlike Quality</span>
+                            <div class="meter-container">
+                                <div class="meter-fill" data-value="90"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vibe-card">
+                    <h3>Fallen Angels</h3>
+                    <div class="vibe-meters">
+                        <div class="vibe-meter">
+                            <span class="vibe-label">🌆 Urban Loneliness</span>
+                            <div class="meter-container">
+                                <div class="meter-fill" data-value="100"></div>
+                            </div>
+                        </div>
+                        <div class="vibe-meter">
+                            <span class="vibe-label">❤️ Romantic Melancholy</span>
+                            <div class="meter-container">
+                                <div class="meter-fill" data-value="80"></div>
+                            </div>
+                        </div>
+                        <div class="vibe-meter">
+                            <span class="vibe-label">🌀 Dreamlike Quality</span>
+                            <div class="meter-container">
+                                <div class="meter-fill" data-value="85"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Fallen Angels (1995) -->
-            <div class="film-card">
-                <div class="poster-container">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/Fallen_Angels_poster.jpg/220px-Fallen_Angels_poster.jpg" alt="Fallen Angels Poster" class="film-poster">
+        <!-- Section 5: Outro -->
+        <section class="outro-section" id="outro">
+            <div class="crt-effect">
+                <div class="quote-container">
+                    <blockquote class="wkw-quote">
+                        "I think that in life, we have many moments that we remember, and these moments are not necessarily the most important ones. They are just moments that we remember."
+                    </blockquote>
+                    <cite class="quote-author">— Wong Kar-wai</cite>
                 </div>
-                <div class="film-info">
-                    <h4>Fallen Angels (墮落天使)</h4>
-                    <p class="year">1995</p>
-                    <p class="genre">Crime Drama</p>
-                    <p class="synopsis">Two parallel stories: a hitman and his female partner, and a mute ex-convict. Shot in the neon-lit streets of Hong Kong with distinctive wide-angle cinematography.</p>
-                    <p class="cast"><strong>Cast:</strong> Leon Lai, Michelle Reis, Takeshi Kaneshiro, Charlie Yeung</p>
-                    <p class="runtime"><strong>Runtime:</strong> 99 minutes</p>
+                <div class="end-transmission">
+                    <span class="transmission-text">END OF TRANSMISSION</span>
                 </div>
             </div>
+        </section>
+    </main>
 
-            <!-- Happy Together (1997) -->
-            <div class="film-card">
-                <div class="poster-container">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8a/Happy_Together_poster.jpg/220px-Happy_Together_poster.jpg" alt="Happy Together Poster" class="film-poster">
-                </div>
-                <div class="film-info">
-                    <h4>Happy Together (春光乍洩)</h4>
-                    <p class="year">1997</p>
-                    <p class="genre">Romance Drama</p>
-                    <p class="synopsis">Two Hong Kong men's turbulent relationship while living in Buenos Aires. Won Best Director at Cannes Film Festival.</p>
-                    <p class="cast"><strong>Cast:</strong> Tony Leung, Leslie Cheung, Chang Chen</p>
-                    <p class="runtime"><strong>Runtime:</strong> 96 minutes</p>
-                </div>
-            </div>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#hero" class="nav-link">Who</a></li>
+            <li><a href="#favorite" class="nav-link">Why</a></li>
+            <li><a href="#films" class="nav-link">Films</a></li>
+            <li><a href="#vibe" class="nav-link">Vibe</a></li>
+            <li><a href="#outro" class="nav-link">End</a></li>
+        </ul>
+    </nav>
 
-            <!-- In the Mood for Love (2000) -->
-            <div class="film-card">
-                <div class="poster-container">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/4e/In_the_Mood_for_Love_poster.jpg/220px-In_the_Mood_for_Love_poster.jpg" alt="In the Mood for Love Poster" class="film-poster">
-                </div>
-                <div class="film-info">
-                    <h4>In the Mood for Love (花樣年華)</h4>
-                    <p class="year">2000</p>
-                    <p class="genre">Romance Drama</p>
-                    <p class="synopsis">Two neighbors in 1960s Hong Kong suspect their spouses are having an affair and begin their own relationship. Considered one of the greatest films ever made.</p>
-                    <p class="cast"><strong>Cast:</strong> Tony Leung, Maggie Cheung</p>
-                    <p class="runtime"><strong>Runtime:</strong> 98 minutes</p>
-                </div>
-            </div>
-
-            <!-- 2046 (2004) -->
-            <div class="film-card">
-                <div class="poster-container">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8a/2046_poster.jpg/220px-2046_poster.jpg" alt="2046 Poster" class="film-poster">
-                </div>
-                <div class="film-info">
-                    <h4>2046 (2046)</h4>
-                    <p class="year">2004</p>
-                    <p class="genre">Sci-Fi Romance</p>
-                    <p class="synopsis">A writer's relationships with various women, intercut with scenes from his science fiction novel about a train to the year 2046.</p>
-                    <p class="cast"><strong>Cast:</strong> Tony Leung, Zhang Ziyi, Gong Li, Faye Wong</p>
-                    <p class="runtime"><strong>Runtime:</strong> 129 minutes</p>
-                </div>
-            </div>
-
-            <!-- My Blueberry Nights (2007) -->
-            <div class="film-card">
-                <div class="poster-container">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8a/My_Blueberry_Nights_poster.jpg/220px-My_Blueberry_Nights_poster.jpg" alt="My Blueberry Nights Poster" class="film-poster">
-                </div>
-                <div class="film-info">
-                    <h4>My Blueberry Nights (藍莓之夜)</h4>
-                    <p class="year">2007</p>
-                    <p class="genre">Romance Drama</p>
-                    <p class="synopsis">A young woman's journey across America, meeting various characters and discovering herself. Wong's first English-language film.</p>
-                    <p class="cast"><strong>Cast:</strong> Norah Jones, Jude Law, Natalie Portman, Rachel Weisz</p>
-                    <p class="runtime"><strong>Runtime:</strong> 95 minutes</p>
-                </div>
-            </div>
-
-            <!-- The Grandmaster (2013) -->
-            <div class="film-card">
-                <div class="poster-container">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8a/The_Grandmaster_poster.jpg/220px-The_Grandmaster_poster.jpg" alt="The Grandmaster Poster" class="film-poster">
-                </div>
-                <div class="film-info">
-                    <h4>The Grandmaster (一代宗師)</h4>
-                    <p class="year">2013</p>
-                    <p class="genre">Martial Arts Drama</p>
-                    <p class="synopsis">The life story of Ip Man, the legendary martial arts master who trained Bruce Lee. Features stunning action sequences and period detail.</p>
-                    <p class="cast"><strong>Cast:</strong> Tony Leung, Zhang Ziyi, Chang Chen</p>
-                    <p class="runtime"><strong>Runtime:</strong> 130 minutes</p>
-                </div>
-            </div>
-
-            <!-- Blossoms Shanghai (2023) -->
-            <div class="film-card">
-                <div class="poster-container">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8a/Blossoms_Shanghai_poster.jpg/220px-Blossoms_Shanghai_poster.jpg" alt="Blossoms Shanghai Poster" class="film-poster">
-                </div>
-                <div class="film-info">
-                    <h4>Blossoms Shanghai (繁花)</h4>
-                    <p class="year">2023</p>
-                    <p class="genre">Drama</p>
-                    <p class="synopsis">A television series adaptation of Jin Yucheng's novel about Shanghai in the 1990s, following the rise and fall of a businessman during China's economic boom.</p>
-                    <p class="cast"><strong>Cast:</strong> Hu Ge, Ma Yili, Tang Yan</p>
-                    <p class="runtime"><strong>Runtime:</strong> 30 episodes</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Awards and Recognition -->
-    <section class="awards">
-        <h3>Awards and Recognition</h3>
-        <div class="awards-content">
-            <ul>
-                <li><strong>Cannes Film Festival:</strong> Best Director for "Happy Together" (1997)</li>
-                <li><strong>Hong Kong Film Awards:</strong> Best Director for "In the Mood for Love" (2001)</li>
-                <li><strong>Asian Film Awards:</strong> Lifetime Achievement Award (2013)</li>
-                <li><strong>Venice Film Festival:</strong> Golden Lion nomination for "In the Mood for Love" (2000)</li>
-                <li><strong>Academy Awards:</strong> Hong Kong's official submission for "In the Mood for Love" (2000)</li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- Interactive Elements -->
-    <section class="interactive">
-        <h3>Explore the Films</h3>
-        <button id="changeTextBtn">Discover Random Film Fact</button>
-        <p id="dynamicText">Click the button to learn something fascinating about Wong Kar-wai's films!</p>
-    </section>
-
-    <!-- Container for the 3D sphere -->
-    <div id="sphere-container"></div>
-
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
